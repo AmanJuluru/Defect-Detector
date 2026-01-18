@@ -1,74 +1,232 @@
-# Automobile Defect Detection System
+# 🚗 Car Defect Detection Using YOLO Model
 
-An advanced AI-powered application designed to detect and analyze defects on automobile exteriors automatically. This system leverages computer vision to identify issues like dents, scratches, and other damages, providing a streamlined solution for vehicle inspection.
+<div align="center">
 
-## Features
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.95+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-13+-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![YOLO](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF?style=for-the-badge&logo=yolo&logoColor=black)
+![Firebase](https://img.shields.io/badge/Firebase-Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 
-- **Real-Time Defect Detection**: Instantly analyzes live camera feeds or uploaded images to detect defects.
-- **Interactive Dashboard**: View detection history, statistics, and manage records.
-- **User Authentication**: Secure login and registration powered by Firebase.
-- **Cross-Platform**: Accessible via web browsers on desktop and mobile.
-- **Visual Feedback**: Bounding boxes and confidence scores for identified defects.
+**An AI-powered web portal for automobile exterior defect detection using deep learning**
 
-## Tech Stack
+[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Demo](#-demo) • [Tech Stack](#-tech-stack) • [Documentation](#-documentation)
 
-- **Frontend**: Next.js, TypeScript, Tailwind CSS
-- **Backend**: FastAPI (Python)
-- **AI Model**: YOLO (Ultralytics) for object detection
-- **Database & Auth**: Firebase
+</div>
 
-## Getting Started
+---
+
+## 📖 Overview
+
+This project is a **secure web portal** designed for manufacturing inspection teams to detect exterior vehicle defects using state-of-the-art **YOLOv8** deep learning technology. The system enables quality assurance teams to upload vehicle images and receive instant AI-powered defect analysis with visual bounding box annotations.
+
+### 🎯 Key Highlights
+
+- **Real-time Detection**: Sub-second inference time for instant results backed by FastAPI.
+- **Interactive Dashboard**: Modern Next.js interface for viewing detection history and statistics.
+- **Secure Access**: Robust user authentication and management powered by Firebase.
+- **Visual Feedback**: Color-coded bounding boxes for easy defect identification.
+- **History Tracking**: Complete audit trail of all uploaded inspections.
+
+---
+
+## ✨ Features
+
+### 🔍 Defect Detection
+The pre-trained YOLO model can detect **5 types** of automobile exterior defects:
+
+| Defect Type | Visual Indicator |
+|-------------|------------------|
+| 🔴 **Dent** | Pink bounding box |
+| 🔵 **Scratch** | Blue bounding box |
+| 🟡 **Lamp Broken** | Yellow bounding box |
+| 🟣 **Glass Broken** | Purple bounding box |
+| ⭕ **Tire Flat** | Red bounding box |
+
+### 🛡️ User Management (Firebase)
+- Google Sign-In & Email/Password authentication
+- Secure session management
+- User profile synchronization
+
+### 📊 Dashboard & Analytics
+- Real-time inspection statistics
+- Visual breakdown of broken vs non-broken vehicles
+- Recent inspection activity feed
+
+---
+
+## 🚀 Installation
 
 ### Prerequisites
 
 - Node.js (v18 or higher)
 - Python (v3.9 or higher)
-- Git
+- Firebase Account & Credentials
 
-### Installation
+### Step 1: Clone the Repository
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/project-name.git
-   cd project-name
-   ```
+```bash
+git clone https://github.com/AmanJuluru/Defect-Detector.git
+cd Defect-Detector
+```
 
-2. **Backend Setup**
-   Navigate to the backend directory and install dependencies:
-   ```bash
-   cd backend
-   python -m venv .venv
-   # Windows
-   .venv\Scripts\activate
-   # Mac/Linux
-   # source .venv/bin/activate
-   pip install -r requirements.txt
-   ```
-   Start the backend server:
-   ```bash
-   uvicorn main:app --reload
-   ```
+### Step 2: Backend Setup
 
-3. **Frontend Setup**
-   Navigate to the frontend directory and install dependencies:
-   ```bash
-   cd ../frontend
-   npm install
-   ```
-   Start the frontend development server:
-   ```bash
-   npm run dev
-   ```
+Navigate to the backend directory:
+```bash
+cd backend
+python -m venv .venv
+# Activate Virtual Env (Windows)
+.venv\Scripts\activate
+# Install Dependencies
+pip install -r requirements.txt
+```
 
-4. **Access the Application**
-   Open [http://localhost:3000](http://localhost:3000) with your browser.
+Start the FastAPI server:
+```bash
+uvicorn main:app --reload
+```
+The backend will start at `http://127.0.0.1:8000`
 
-## Project Structure
+### Step 3: Frontend Setup
 
-- `/backend`: FastAPI server and YOLO implementation
-- `/frontend`: Next.js web application
-- `/model`: Trained YOLO weights
+Navigate to the frontend directory:
+```bash
+cd ../frontend
+npm install
+```
 
-## Contributing
+Start the Next.js development server:
+```bash
+npm run dev
+```
+The application will be accessible at `http://localhost:3000`
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+---
+
+## 💻 Usage
+
+### 1. Register/Login
+Log in using your secure credentials or Google account.
+
+### 2. Upload Image
+Navigate to the **Upload** section and:
+- Select a vehicle image (JPG, PNG)
+- Capture a photo using the **Webcam** feature
+
+### 3. View Results
+The AI processes the image and displays:
+- Annotated image with bounding boxes
+- Defect list with confidence scores
+- Status: **Broken** / **Non-Broken**
+
+---
+
+## 🎬 Demo
+
+### Detection Flow
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Client App     │────▶│  FastAPI API    │────▶│  YOLO Inference │
+│  (Next.js)      │     │  (Python)       │     │  (PyTorch)      │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                                       │
+┌─────────────────┐     ┌─────────────────┐            ▼
+│  Render Results │◀────│  JSON Response  │◀───(Detections)
+│  (Dashboard)    │     │  & Annotations  │
+└─────────────────┘     └─────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+| Technology | Purpose |
+|------------|---------|
+| **Python 3.9+** | Core logic |
+| **FastAPI** | High-performance API framework |
+| **Firebase Admin** | User authentication & management |
+
+### Machine Learning
+| Technology | Purpose |
+|------------|---------|
+| **Ultralytics YOLOv8** | Object detection model |
+| **OpenCV** | Image processing |
+| **PyTorch** | Deep learning framework |
+
+### Frontend
+| Technology | Purpose |
+|------------|---------|
+| **Next.js 13** | React framework |
+| **TypeScript** | Type-safe development |
+| **Tailwind CSS** | Styling & UI components |
+
+---
+
+## 📁 Project Structure
+
+```
+project/
+├── backend/
+│   ├── main.py                 # FastAPI entry point
+│   ├── inference.py            # YOLO model wrapper
+│   ├── models.py               # Pydantic models
+│   └── requirements.txt        # Python dependencies
+├── frontend/
+│   ├── app/                    # Next.js App Router
+│   │   ├── dashboard/          # Dashboard pages
+│   │   ├── upload/             # Upload interface
+│   │   └── login/              # Auth pages
+│   └── components/             # Reusable UI components
+├── model/
+│   └── defect_model.pt         # Pre-trained YOLO weights
+└── README.md                   # Project documentation
+```
+
+---
+
+## 🔐 Security Features
+
+| Feature | Implementation |
+|---------|----------------|
+| **Authentication** | Firebase Auth (OAuth2 & JWT) |
+| **API Security** | Bearer Token Validation |
+| **CORS Policy** | Restricted origin access |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👤 Author
+
+**Aman Juluru**
+
+- GitHub: [@AmanJuluru](https://github.com/AmanJuluru)
+
+---
+
+<div align="center">
+
+**⭐ Star this repository if you found it helpful!**
+
+Made with ❤️ for the Automobile Industry
+
+</div>

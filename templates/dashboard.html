@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user }}</h2>
+
+<div class="card">
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button type="submit">Upload & Detect</button>
+    </form>
+</div>
+
+{% if result_image %}
+<div class="card">
+    <h3>Status: {{ vehicle_status }}</h3>
+    <ul>
+        {% for d in detections %}
+            <li>{{ d }}</li>
+        {% endfor %}
+    </ul>
+    <img src="{{ result_image }}" width="600">
+</div>
+{% endif %}
+{% endblock %}
