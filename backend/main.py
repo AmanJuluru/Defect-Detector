@@ -13,6 +13,9 @@ from firebase_admin import credentials, auth
 from database import engine, Base, get_db
 import models, schemas, crud, inference
 from fastapi.security import OAuth2PasswordBearer
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -50,7 +53,7 @@ app.add_middleware(
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 # API Key from frontend config
-FIREBASE_WEB_API_KEY = "AIzaSyBHrDnsfya8CKg2gW2BTH9fUED4xUj10jg"
+FIREBASE_WEB_API_KEY = os.getenv("FIREBASE_WEB_API_KEY")
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     try:
