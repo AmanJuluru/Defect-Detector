@@ -110,10 +110,11 @@ The application will be accessible at `http://localhost:3000`
 ### 1. Register/Login
 Log in using your secure credentials or Google account.
 
-### 2. Upload Image
+### 2. Upload 
 Navigate to the **Upload** section and:
 - Select a vehicle image (JPG, PNG)
 - Capture a photo using the **Webcam** feature
+- Use WebCam to show LiveFeed for **Real Time Detection**
 
 ### 3. View Results
 The AI processes the image and displays:
